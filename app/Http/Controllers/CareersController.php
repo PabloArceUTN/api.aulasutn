@@ -5,27 +5,26 @@ namespace App\Http\Controllers;
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\ResponseFactory;
-use App\Http\Models\Office;
+use App\Http\Models\Career;
 
 use App\Http\Requests;
 
-class OfficesController extends Controller
+class CareersController extends Controller
 {
     public function index() {   
-        return Office::all();
+        return Career::all();
     }
 
     public function store(Request $request) {
-        echo "string";
-        $office = new Office;
+        $career = new Career;
         //var_dump($request->all());
-        $office['attributes'] = $request->all();
+        $career['attributes'] = $request->all();
         try {
-            if($office->save()) {
+            if($career->save()) {
                 return Response::json(array(
                     "status" => 201,
-                    "message" => "A new office has been created!",
-                    "office" => $office,
+                    "message" => "A new career has been created!",
+                    "career" => $career,
                 ), 201);
             } else {
                 throw new Exception("Error Processing Request");
@@ -34,21 +33,17 @@ class OfficesController extends Controller
             return Response::json(array(
                     "status" => 406,
                     "message" => $e->getMessage(),
-                    "office" => $office,
+                    "career" => $career,
             ), 406);
         }
     }
 
-    public function show($id) {
-        return Office::find($id);
-    }
-
     public function update(Request $request, $id) {
-        $office = Office::find($id);
-        if(sizeof($office)) {
-            $office->fill($request->all());
+        $career = Career::find($id);
+        if(sizeof($career)) {
+            $career->fill($request->all());
             try {
-                if($office->save()) {
+                if($career->save()) {
                     return Response::json(array(), 204);
                 } else {
                     throw new Exception("Error Processing Request");
@@ -57,28 +52,27 @@ class OfficesController extends Controller
                 return Response::json(array(
                         "status" => 406,
                         "message" => $e->getMessage(),
-                        "office" => $office,
+                        "career" => $career,
                 ), 406);
             }
         } else {
             return Response::json(array(
                 "status" => 404,
-                "message" => "Office not found!"
+                "message" => "Career not found!"
             ), 404);
         }
     }
 
     public function destroy($id) {
-        $office = Office::find($id);
-        if(sizeof($office)) {
-            $office->delete();
+        $career = Career::find($id);
+        if(sizeof($career)) {
+            $career->delete();
             return Response::json(array(), 204);
         } else {
             return Response::json(array(
                 "status" => 404,
-                "message" => "Office not found!"
+                "message" => "Career not found!"
             ), 404);
         }
     }
-
 }
