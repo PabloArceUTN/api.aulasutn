@@ -81,4 +81,9 @@ class OfficesController extends Controller
         }
     }
 
+    public function add_user($office_id, $user_id) {
+        $office = Office::find($id);
+        $office->users()->attach($user_id);
+    }
+
 }

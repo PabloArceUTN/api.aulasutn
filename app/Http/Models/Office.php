@@ -10,4 +10,8 @@ class Office extends Model
     public $timestamps = false;
     protected $connection = "central";
     protected $fillable = ['name', 'description'];
+
+    public function users() {
+    	return $this->belongsToMany('App\Http\Models\Users', 'office_user', 'office_id', 'user_id');
+    }
 }

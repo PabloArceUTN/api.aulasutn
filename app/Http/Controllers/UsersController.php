@@ -8,6 +8,7 @@ use Response;
 use Illuminate\Database\QueryException;
 use Illuminate\Routing\ResponseFactory;
 use App\Http\Models\Users;
+use App\Http\Models\Office;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -110,4 +111,20 @@ class UsersController extends Controller
         	), 404);
     	}
     }
+
+    public function add_office($user_id, $office_id) {
+      $user = Users::find($user_id);
+      $user->offices()->attach($office_id);
+    }
+
+    public function add_career($user_id, $career_id) {
+      $user = Users::find($user_id);
+      $user->careers()->attach($career_id);
+    }
+
+    public function add_course($user_id, $course_id) {
+      $user = Users::find($user_id);
+      $user->courses()->attach($course_id);
+    }
+
 }

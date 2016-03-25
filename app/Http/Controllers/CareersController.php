@@ -75,4 +75,15 @@ class CareersController extends Controller
             ), 404);
         }
     }
+
+    public function add_course($career_id, $course_id) {
+        $career = Career::find($id);
+        $career->courses()->attach($course_id);
+    }
+
+    public function add_user($career_id, $user_id) {
+        $career = Career::find($id);
+        $career->users()->attach($user_id);
+    }
+
 }
