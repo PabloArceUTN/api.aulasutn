@@ -85,4 +85,14 @@ class CoursesController extends Controller
         $course->users()->attach($user_id);
     }
 
+    public function remove_career($course_id, $career_id) {
+        $course = Course::find($id);
+        $course->careers()->detach($career_id);
+    }
+
+    public function remove_user($course_id, $user_id) {
+        $course = Course::find($id);
+        $course->users()->detach($user_id);
+    }
+
 }

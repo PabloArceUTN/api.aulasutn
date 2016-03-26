@@ -17,7 +17,6 @@ class CareersController extends Controller
 
     public function store(Request $request) {
         $career = new Career;
-        //var_dump($request->all());
         $career['attributes'] = $request->all();
         try {
             if($career->save()) {
@@ -84,6 +83,16 @@ class CareersController extends Controller
     public function add_user($career_id, $user_id) {
         $career = Career::find($id);
         $career->users()->attach($user_id);
+    }
+
+     public function remove_course($career_id, $course_id) {
+        $career = Career::find($id);
+        $career->courses()->detach($course_id);
+    }
+
+    public function remove_user($career_id, $user_id) {
+        $career = Career::find($id);
+        $career->users()->detach($user_id);
     }
 
 }

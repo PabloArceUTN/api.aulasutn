@@ -127,4 +127,19 @@ class UsersController extends Controller
       $user->courses()->attach($course_id);
     }
 
+    public function remove_office($user_id, $office_id) {
+      $user = Users::find($user_id);
+      $user->offices()->detach($office_id);
+    }
+
+    public function remove_career($user_id, $career_id) {
+      $user = Users::find($user_id);
+      $user->careers()->detach($career_id);
+    }
+
+    public function remove_course($user_id, $course_id) {
+      $user = Users::find($user_id);
+      $user->courses()->detach($course_id);
+    }
+
 }

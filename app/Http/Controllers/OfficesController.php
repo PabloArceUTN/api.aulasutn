@@ -18,7 +18,6 @@ class OfficesController extends Controller
     public function store(Request $request) {
         echo "string";
         $office = new Office;
-        //var_dump($request->all());
         $office['attributes'] = $request->all();
         try {
             if($office->save()) {
@@ -82,8 +81,13 @@ class OfficesController extends Controller
     }
 
     public function add_user($office_id, $user_id) {
-        $office = Office::find($id);
+        $office = Office::find($office_id);
         $office->users()->attach($user_id);
+    }
+
+    public function remove_user($office_id, $user_id) {
+        $office = Office::find($office_id);
+        $office->users()->detach($user_id);
     }
 
 }
