@@ -16,7 +16,6 @@ class OfficesController extends Controller
     }
 
     public function store(Request $request) {
-        echo "string";
         $office = new Office;
         $office['attributes'] = $request->all();
         try {
@@ -48,7 +47,11 @@ class OfficesController extends Controller
             $office->fill($request->all());
             try {
                 if($office->save()) {
-                    return Response::json(array(), 204);
+                    return Response::json(array(
+                          "status" => 200,
+                          "message" => "An office has been updated successfully!",
+                          "office" => $office
+                        ), 200);
                 } else {
                     throw new Exception("Error Processing Request");
                 }
@@ -71,7 +74,11 @@ class OfficesController extends Controller
         $office = Office::find($id);
         if(sizeof($office)) {
             $office->delete();
-            return Response::json(array(), 204);
+            return Response::json(array(
+                          "status" => 200,
+                          "message" => "An office has been deleted successfully!",
+                          "office" => $office
+                        ), 200);
         } else {
             return Response::json(array(
                 "status" => 404,

@@ -43,7 +43,11 @@ class CoursesController extends Controller
             $course->fill($request->all());
             try {
                 if($course->save()) {
-                    return Response::json(array(), 204);
+                    return Response::json(array(
+                          "status" => 200,
+                          "message" => "A course has been updated successfully!",
+                          "course" => $course
+                        ), 200);
                 } else {
                     throw new Exception("Error Processing Request");
                 }
@@ -66,7 +70,11 @@ class CoursesController extends Controller
         $course = Course::find($id);
         if(sizeof($course)) {
             $course->delete();
-            return Response::json(array(), 204);
+            return Response::json(array(
+                          "status" => 200,
+                          "message" => "A course has been deleted successfully!",
+                          "course" => $course
+                        ), 200);
         } else {
             return Response::json(array(
                 "status" => 404,

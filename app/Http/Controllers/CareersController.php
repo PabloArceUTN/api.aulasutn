@@ -43,7 +43,11 @@ class CareersController extends Controller
             $career->fill($request->all());
             try {
                 if($career->save()) {
-                    return Response::json(array(), 204);
+                    return Response::json(array(
+                          "status" => 200,
+                          "message" => "A career has been updated successfully!",
+                          "career" => $career
+                        ), 200);
                 } else {
                     throw new Exception("Error Processing Request");
                 }
@@ -66,7 +70,11 @@ class CareersController extends Controller
         $career = Career::find($id);
         if(sizeof($career)) {
             $career->delete();
-            return Response::json(array(), 204);
+            return Response::json(array(
+                          "status" => 200,
+                          "message" => "A career has been deleted successfully!",
+                          "career" => $career
+                        ), 200);
         } else {
             return Response::json(array(
                 "status" => 404,

@@ -29,7 +29,6 @@ class UsersController extends Controller
     public function store(Request $request)
     {
        	$user = new Users;
-        //var_dump($request->all());
        	$user['attributes'] = $request->all();
        	try {
        		if($user->save()) {
@@ -73,9 +72,13 @@ class UsersController extends Controller
     		$user->fill($request->all());
     		try {
        			if($user->save()) {
-           			return Response::json(array(), 204);
+           			  return Response::json(array(
+                          "status" => 200,
+                          "message" => "A user has been updated successfully!",
+                          "user" => $user
+                        ), 200);
        			} else {
-           			throw new Exception("Error Processing Request");
+           			  throw new Exception("Error Processing Request");
        			}
        		} catch(QueryException $e) {
        			return Response::json(array(
@@ -103,7 +106,11 @@ class UsersController extends Controller
     	if(sizeof($before)) {
     		$before->active = false;
     		$before->save();
-        	return Response::json(array(), 204);
+        	return Response::json(array(
+                          "status" => 200,
+                          "message" => "A user has been disabled successfully!",
+                          "user" => $before
+                      ), 200);
     	} else {
     		return Response::json(array(
            		"status" => 404,
