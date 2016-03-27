@@ -5,3 +5,6 @@
 Homestead.yaml
 Homestead.json
 .env
+vendor/vlucas/phpdotenv/src/Exception/ValidationException.php
+vendor/vlucas/phpdotenv/src/Exception/ValidationException.php
+vendor/vlucas/phpdotenv/src/Exception/InvalidPathException.php
