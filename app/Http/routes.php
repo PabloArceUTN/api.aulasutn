@@ -49,3 +49,10 @@ Route::delete('/precincts/schedule/{precinct}/{schedule}', 'PrecinctController@r
 
 Route::post('/schedules/precinct/{schedule}/{precinct}', 'PrecinctController@add_precinct');
 Route::delete('/schedules/precinct/{schedule}/{precinct}', 'PrecinctController@add_precinct');
+
+//Authentication middleware group
+Route::group(['prefix' => 'api'], function()
+{
+    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+});
