@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'central'),
+    'default' => 'central',
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,35 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
+            'database' => 'aulasutn_central',
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
+
+        'san_carlos' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'aulasutn_san_carlos',
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
+
+        'grecia' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'aulasutn_grecia',
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',

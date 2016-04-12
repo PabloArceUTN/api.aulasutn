@@ -11,7 +11,7 @@ use App\Http\Requests;
 
 class CareersController extends Controller
 {
-    public function index() {   
+    public function index() {
         return Career::all();
     }
 
