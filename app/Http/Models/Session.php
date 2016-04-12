@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Session extends Model
 {
   protected $table = "sessions";
-  public $timestamps = false;
   protected $connection = "central";
-  protected $fillable = ['token', 'until_to', 'active'];
+  public $timestamps = false;
+  protected $fillable = ['token', 'expires', 'active'];
 
   public function users() {
     //  Param #1 Model to, Param #2 table on the DB, Param #3 first column, Param #4 second column

@@ -22,7 +22,7 @@ class Users extends Model
     public function careers() {
     	return $this->belongsToMany('App\Http\Models\Career', 'career_user', 'career_id', 'user_id');
     }
-    public function Sessions() {
+    public function sessions() {
       //  Param #1 Model to, Param #2 table on the DB, Param #3 first column, Param #4 second column
       return $this->belongsToMany('App\Http\Models\Session', 'users_sessions', 'user_id', 'session_id');
     }
