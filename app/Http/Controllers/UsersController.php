@@ -17,6 +17,11 @@ class UsersController extends Controller
   /**
   * Returns all the users that has been created.
   */
+  public function __construct(Request $request)
+  {
+    //Call for token authentication before execute the rest of the controller
+    Parent::InitAuth($request);
+  }
   public function index()
   {
     return Users::all();
