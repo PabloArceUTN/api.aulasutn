@@ -13,6 +13,11 @@ class EventController extends Controller
 {
     protected $connection = 'central';
 
+    public function __construct(Request $request)
+    {
+      //Call for token authentication before execute the rest of the controller
+      Parent::InitAuth($request);
+    }
     public function index() {
         $event = new Event;
         $event->setConnection($request->header()['office-name'][0]);
