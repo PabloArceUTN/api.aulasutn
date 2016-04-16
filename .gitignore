@@ -1,7 +1,12 @@
 /storage
-/vendor
+vendor/*
+!vendor/tymon
 /node_modules
 /public/storage
 Homestead.yaml
 Homestead.json
 .env
+vendor/vlucas/phpdotenv/src/Exception/ValidationException.php
+vendor/vlucas/phpdotenv/src/Exception/ValidationException.php
+vendor/vlucas/phpdotenv/src/Exception/InvalidPathException.php
+DEVNOTE.txt
