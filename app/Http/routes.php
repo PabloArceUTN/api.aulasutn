@@ -24,6 +24,14 @@ Route::resource('/precincts', 'PrecinctController');
 Route::resource('/schedules', 'ScheduleController');
 Route::resource('/periods', 'PeriodController');
 
+Route::get('/careers/courses', 'CareersController@get_courses');
+Route::get('/careers/users', 'CareersController@get_users');
+Route::get('/courses/careers', 'CoursesController@get_careers');
+Route::get('/courses/users', 'CoursesController@get_users');
+Route::get('/offices/users', 'OfficesController@get_users');
+Route::get('/precincts/schedules', 'PrecinctController@get_schedules');
+Route::get('/schedule/precincts', 'CoursesController@get_precincts');
+
 Route::post('/users/office/{user}/{office}', 'UsersController@add_office');
 Route::post('/users/career/{user}/{career}', 'UsersController@add_career');
 Route::post('/users/course/{user}/{course}', 'UsersController@add_course');
@@ -48,7 +56,7 @@ Route::post('/precincts/schedule/{precinct}/{schedule}', 'PrecinctController@add
 Route::delete('/precincts/schedule/{precinct}/{schedule}', 'PrecinctController@remove_schedule');
 
 Route::post('/schedules/precinct/{schedule}/{precinct}', 'PrecinctController@add_precinct');
-Route::delete('/schedules/precinct/{schedule}/{precinct}', 'PrecinctController@add_precinct');
+Route::delete('/schedules/precinct/{schedule}/{precinct}', 'PrecinctController@remove_precinct');
 
 //Authentication middleware group
 Route::group(['prefix' => 'api'], function()

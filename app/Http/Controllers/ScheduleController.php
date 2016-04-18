@@ -90,10 +90,29 @@ class ScheduleController extends Controller
         }
     }
 
+    public function show(Request $request, $id) {
+        $schedule = new Schedule;
+        $schedule->setConnection($request->header()['office-name'][0]);
+        return $schedule->find($id);
+    }
+
+    public function get_precincts(Request $request, $id) {
+        $schedule = new Schedule;
+        $schedule->setConnection($request->header()['office-name'][0]);
+        return $schedule->find($id)->precincts;
+    }
+
    public function add_precinct(Request $request, $schedule_id, $precinct_id) {
         $schedule = new Schedule;
         $schedule->setConnection($request->header()['office-name'][0]);
-        $schedule = $precinct->find($id);
+        $schedule = $schedule->find($id);
         $schedule->precincts()->attach($precinct_id);
+    }
+
+    public function remove_precinct(Request $request, $schedule_id, $precinct_id) {
+        $schedule = new Schedule;
+        $schedule->setConnection($request->header()['office-name'][0]);
+        $schedule = $schedule->find($id);
+        $schedule->precincts()->detach($precinct_id);
     }
 }

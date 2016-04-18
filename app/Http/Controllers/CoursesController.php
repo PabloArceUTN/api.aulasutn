@@ -83,6 +83,18 @@ class CoursesController extends Controller
         }
     }
 
+    public function show($id) {
+        return Career::find($id);
+    }
+
+    public function get_careers($id) {
+        return Course::find($id)->careers;
+    }
+
+    public function get_users($id) {
+        return Course::find($id)->users;
+    }
+
     public function add_career($course_id, $career_id) {
         $course = Course::find($id);
         $course->careers()->attach($career_id);
