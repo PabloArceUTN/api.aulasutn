@@ -8,6 +8,7 @@ use Response;
 use Illuminate\Database\QueryException;
 use Illuminate\Routing\ResponseFactory;
 use App\Http\Models\Users;
+use App\Http\Models\Session;
 use App\Http\Models\Office;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,7 @@ class UsersController extends Controller
   public function __construct(Request $request)
   {
     Parent::InitAuth($request);
+
   }
   public function index()
   {

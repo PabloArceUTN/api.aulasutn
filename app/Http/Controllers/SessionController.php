@@ -29,6 +29,10 @@ class SessionController extends Controller
     try {
       $dots = str_replace('.', '', $request->input('token'));
       if (Session::has($dots)) {
+        //Find the session
+        $sm= SM::where('token', $request->input('token'))->first();
+        $sm->users()->detach($sm->users[0]->id);
+        $sm->delete();
         Session::forget($dots);
         return response()->json(['message' => 'logout'], 200);
       }else {
