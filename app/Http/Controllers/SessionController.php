@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Models\Session as SM;
+use App\Http\Models\Users;
 use Session;
 
 class SessionController extends Controller
@@ -26,8 +28,6 @@ class SessionController extends Controller
   {
     try {
       $dots = str_replace('.', '', $request->input('token'));
-      echo $dots;
-      var_dump(Session::all());
       if (Session::has($dots)) {
         Session::forget($dots);
         return response()->json(['message' => 'logout'], 200);
@@ -38,5 +38,10 @@ class SessionController extends Controller
       return response()->json(['error' => '$e'], 422);
     }
   }
+  // private function RemoveSessions($id)
+  // {
+  //   $course = Course::find($id);
+  //   $course->careers()->detach($career_id);
+  // }
 
 }
