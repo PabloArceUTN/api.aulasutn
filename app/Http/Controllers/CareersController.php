@@ -23,7 +23,7 @@ class CareersController extends Controller
 
   public function store(Request $request) {
     $career = new Career;
-    $career['attributes'] = $request->all();
+    $career['attributes'] = $request->except(['remember', 'token']);
     try {
       if($career->save()) {
         return Response::json(array(
@@ -46,7 +46,7 @@ class CareersController extends Controller
   public function update(Request $request, $id) {
     $career = Career::find($id);
     if(sizeof($career)) {
-      $career->fill($request->all());
+      $career->fill($request->except(['remember', 'token']));
       try {
         if($career->save()) {
           return Response::json(array(

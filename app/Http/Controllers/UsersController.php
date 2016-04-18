@@ -19,7 +19,6 @@ class UsersController extends Controller
   */
   public function __construct(Request $request)
   {
-    //Call for token authentication before execute the rest of the controller
     Parent::InitAuth($request);
   }
   public function index()
@@ -35,7 +34,7 @@ class UsersController extends Controller
   {
     //User creation, this way to set a hash password
     $user = new Users;
-    $user['attributes'] = $request->all();
+    $user['attributes'] = $request->except(['remember', 'token']);
     $user->password = \Hash::make($request->input('password'));
     try {
       if($user->save()) {
@@ -76,7 +75,7 @@ class UsersController extends Controller
   {
     $user = Users::find($id);
     if(sizeof($user)) {
-      $user->fill($request->all());
+      $user->fill($request->except(['remember', 'token']));
       try {
         if($user->save()) {
           return Response::json(array(

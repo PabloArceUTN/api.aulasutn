@@ -26,7 +26,7 @@ class PeriodController extends Controller
   public function store(Request $request) {
     $period = new Period;
     $period->setConnection($request->header()['office-name'][0]);
-    $period['attributes'] = $request->all();
+    $period['attributes'] = $request->except(['remember', 'token']);
     try {
       if($period->save()) {
         return Response::json(array(
@@ -51,7 +51,7 @@ class PeriodController extends Controller
     $period->setConnection($request->header()['office-name'][0]);
     $period = $period->find($id);
     if(sizeof($period)) {
-      $period->fill($request->all());
+      $period->fill($request->except(['remember', 'token']));
       try {
         if($period->save()) {
           return Response::json(array(

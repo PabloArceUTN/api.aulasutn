@@ -16,7 +16,7 @@ class PrecinctController extends Controller
     //Call for token authentication before execute the rest of the controller
     Parent::InitAuth($request);
   }
-  
+
   public function index(Request $request) {
     $precinct = new Precinct;
     $precinct->setConnection($request->header()['office-name'][0]);
@@ -26,7 +26,7 @@ class PrecinctController extends Controller
   public function store(Request $request) {
     $precinct = new Precinct;
     $precinct->setConnection($request->header()['office-name'][0]);
-    $precinct['attributes'] = $request->all();
+    $precinct['attributes'] = $request->except(['remember', 'token']);
     try {
       if($precinct->save()) {
         return Response::json(array(
@@ -51,7 +51,7 @@ class PrecinctController extends Controller
     $precinct->setConnection($request->header()['office-name'][0]);
     $precinct = $precinct->find($id);
     if(sizeof($precinct)) {
-      $precinct->fill($request->all());
+      $precinct->fill($request->except(['remember', 'token']));
       try {
         if($precinct->save()) {
           return Response::json(array(

@@ -23,7 +23,7 @@ class OfficesController extends Controller
 
   public function store(Request $request) {
     $office = new Office;
-    $office['attributes'] = $request->all();
+    $office['attributes'] = $request->except(['remember', 'token']);
     try {
       if($office->save()) {
         return Response::json(array(
@@ -50,7 +50,7 @@ class OfficesController extends Controller
   public function update(Request $request, $id) {
     $office = Office::find($id);
     if(sizeof($office)) {
-      $office->fill($request->all());
+      $office->fill($request->except(['remember', 'token']));
       try {
         if($office->save()) {
           return Response::json(array(
