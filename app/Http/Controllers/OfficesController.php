@@ -80,12 +80,6 @@ class OfficesController extends Controller
         return Office::find($id)->users;
     }
 
-    public function add_user($office_id, $user_id) {
-        $office = Office::find($office_id);
-        $office->users()->attach($user_id);
-
-  }
-
   public function destroy($id) {
     $office = Office::find($id);
     if(sizeof($office)) {

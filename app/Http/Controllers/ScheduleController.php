@@ -121,11 +121,4 @@ class ScheduleController extends Controller
       ), 404);
     }
   }
-
-  public function add_precinct(Request $request, $schedule_id, $precinct_id) {
-    $schedule = new Schedule;
-    $schedule->setConnection($request->header()['office-name'][0]);
-    $schedule = $precinct->find($id);
-    $schedule->precincts()->attach($precinct_id);
-  }
 }

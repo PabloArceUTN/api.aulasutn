@@ -90,13 +90,6 @@ class PrecinctController extends Controller
         return $precinct->schedules;
     }    
 
-    public function add_schedule(Request $request, $precinct_id, $schedule_id) {
-        $precinct = new Precinct;
-        $precinct->setConnection($request->header()['office-name'][0]);
-        $precinct = $precinct->find($id);
-        $precinct->schedules()->attach($schedule_id);
-    }
-
     public function remove_schedule(Request $request, $precinct_id, $schedule_id) {
         $precinct = new Precinct;
         $precinct->setConnection($request->header()['office-name'][0]);

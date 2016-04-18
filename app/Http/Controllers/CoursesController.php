@@ -105,11 +105,6 @@ class CoursesController extends Controller
         $course->careers()->attach($career_id);
     }
 
-  public function add_career($course_id, $career_id) {
-    $course = Course::find($id);
-    $course->careers()->attach($career_id);
-  }
-
   public function add_user($course_id, $user_id) {
     $course = Course::find($id);
     $course->users()->attach($user_id);
