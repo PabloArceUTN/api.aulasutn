@@ -1,14 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\ResponseFactory;
 use App\Http\Models\Career;
-
 use App\Http\Requests;
-
 class CareersController extends Controller
 {
   public function __construct(Request $request)
@@ -16,11 +12,9 @@ class CareersController extends Controller
     //Call for token authentication before execute the rest of the controller
     Parent::InitAuth($request);
   }
-
   public function index() {
     return Career::all();
   }
-
   public function store(Request $request) {
     $career = new Career;
     $career['attributes'] = $request->except(['remember', 'token']);
@@ -42,7 +36,6 @@ class CareersController extends Controller
       ), 406);
     }
   }
-
   public function update(Request $request, $id) {
     $career = Career::find($id);
     if(sizeof($career)) {
@@ -71,24 +64,19 @@ class CareersController extends Controller
       ), 404);
     }
   }
-
     public function show($id) {
         return Career::find($id);
     }
-
     public function get_courses($id) {
         return Career::find($id)->courses;
     }
-
     public function get_users($id) {
         return Career::find($id)->users;
     }
-
     public function add_course($career_id, $course_id) {
         $career = Career::find($career_id);
         $career->courses()->attach($course_id);
     }
-
   public function destroy($id) {
     $career = Career::find($id);
     if(sizeof($career)) {
@@ -105,20 +93,16 @@ class CareersController extends Controller
       ), 404);
     }
   }
-
   public function add_user($career_id, $user_id) {
     $career = Career::find($id);
     $career->users()->attach($user_id);
   }
-
   public function remove_course($career_id, $course_id) {
     $career = Career::find($id);
     $career->courses()->detach($course_id);
   }
-
   public function remove_user($career_id, $user_id) {
     $career = Career::find($id);
     $career->users()->detach($user_id);
   }
-
 }

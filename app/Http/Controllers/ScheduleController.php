@@ -1,14 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\ResponseFactory;
 use App\Http\Models\Schedule;
-
 use App\Http\Requests;
-
 class ScheduleController extends Controller
 {
   public function __construct(Request $request)
@@ -16,13 +12,11 @@ class ScheduleController extends Controller
     //Call for token authentication before execute the rest of the controller
     Parent::InitAuth($request);
   }
-
   public function index(Request $request) {
     $schedule = new Schedule;
     $schedule->setConnection($request->header()['office-name'][0]);
     return $schedule->all();
   }
-
   public function store(Request $request) {
     $schedule = new Schedule;
     $schedule->setConnection($request->header()['office-name'][0]);
@@ -45,7 +39,6 @@ class ScheduleController extends Controller
       ), 406);
     }
   }
-
   public function update(Request $request, $id) {
     $schedule = new Schedule;
     $schedule->setConnection($request->header()['office-name'][0]);
@@ -76,33 +69,28 @@ class ScheduleController extends Controller
       ), 404);
     }
   }
-
     public function show(Request $request, $id) {
         $schedule = new Schedule;
         $schedule->setConnection($request->header()['office-name'][0]);
         return $schedule->find($id);
     }
-
     public function get_precincts(Request $request, $id) {
         $schedule = new Schedule;
         $schedule->setConnection($request->header()['office-name'][0]);
         return $schedule->find($id)->precincts;
     }
-
    public function add_precinct(Request $request, $schedule_id, $precinct_id) {
         $schedule = new Schedule;
         $schedule->setConnection($request->header()['office-name'][0]);
         $schedule = $schedule->find($id);
         $schedule->precincts()->attach($precinct_id);
     }
-
     public function remove_precinct(Request $request, $schedule_id, $precinct_id) {
         $schedule = new Schedule;
         $schedule->setConnection($request->header()['office-name'][0]);
         $schedule = $schedule->find($id);
         $schedule->precincts()->detach($precinct_id);
     }
-
   public function destroy(Request $request, $id) {
     $schedule = new Schedule;
     $schedule->setConnection($request->header()['office-name'][0]);

@@ -1,14 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\ResponseFactory;
 use App\Http\Models\Office;
-
 use App\Http\Requests;
-
 class OfficesController extends Controller
 {
   public function __construct(Request $request)
@@ -16,11 +12,9 @@ class OfficesController extends Controller
     //Call for token authentication before execute the rest of the controller
     Parent::InitAuth($request);
   }
-
   public function index() {
     return Office::all();
   }
-
   public function store(Request $request) {
     $office = new Office;
     $office['attributes'] = $request->except(['remember', 'token']);
@@ -42,11 +36,9 @@ class OfficesController extends Controller
       ), 406);
     }
   }
-
   public function show($id) {
     return Office::find($id);
   }
-
   public function update(Request $request, $id) {
     $office = Office::find($id);
     if(sizeof($office)) {
@@ -75,11 +67,9 @@ class OfficesController extends Controller
       ), 404);
     }
   }
-
     public function get_users($id) {
         return Office::find($id)->users;
     }
-
   public function destroy($id) {
     $office = Office::find($id);
     if(sizeof($office)) {
@@ -96,15 +86,12 @@ class OfficesController extends Controller
       ), 404);
     }
   }
-
   public function add_user($office_id, $user_id) {
     $office = Office::find($office_id);
     $office->users()->attach($user_id);
   }
-
   public function remove_user($office_id, $user_id) {
     $office = Office::find($office_id);
     $office->users()->detach($user_id);
   }
-
 }

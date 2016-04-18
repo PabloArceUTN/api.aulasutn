@@ -1,14 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\ResponseFactory;
 use App\Http\Models\Precinct;
-
 use App\Http\Requests;
-
 class PrecinctController extends Controller
 {
   public function __construct(Request $request)
@@ -16,13 +12,11 @@ class PrecinctController extends Controller
     //Call for token authentication before execute the rest of the controller
     Parent::InitAuth($request);
   }
-
   public function index(Request $request) {
     $precinct = new Precinct;
     $precinct->setConnection($request->header()['office-name'][0]);
     return $precinct->all();
   }
-
   public function store(Request $request) {
     $precinct = new Precinct;
     $precinct->setConnection($request->header()['office-name'][0]);
@@ -45,7 +39,6 @@ class PrecinctController extends Controller
       ), 406);
     }
   }
-
   public function update(Request $request, $id) {
     $precinct = new Precinct;
     $precinct->setConnection($request->header()['office-name'][0]);
@@ -76,27 +69,23 @@ class PrecinctController extends Controller
       ), 404);
     }
   }
-
     public function show(Request $request, $id) {
         $precinct = new Precinct;
         $precinct->setConnection($request->header()['office-name'][0]);
         return $precinct->find($id);
-    }        
-
+    }
     public function get_schedules(Request $request, $id) {
         $precinct = new Precinct;
         $precinct->setConnection($request->header()['office-name'][0]);
         $precinct = $precinct->find($id);
         return $precinct->schedules;
-    }    
-
+    }
     public function remove_schedule(Request $request, $precinct_id, $schedule_id) {
         $precinct = new Precinct;
         $precinct->setConnection($request->header()['office-name'][0]);
         $precinct = $precinct->find($id);
         $precinct->schedules()->detach($schedule_id);
     }
-
   public function destroy(Request $request, $id) {
     $precinct = new Precinct;
     $precinct->setConnection($request->header()['office-name'][0]);
@@ -115,7 +104,6 @@ class PrecinctController extends Controller
       ), 404);
     }
   }
-
   public function add_schedule(Request $request, $precinct_id, $schedule_id) {
     $precinct = new Precinct;
     $precinct->setConnection($request->header()['office-name'][0]);
