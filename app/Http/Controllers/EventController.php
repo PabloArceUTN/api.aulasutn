@@ -13,6 +13,11 @@ class EventController extends Controller
 {
     protected $connection = 'central';
 
+    public function __construct(Request $request)
+    {
+      //Call for token authentication before execute the rest of the controller
+      Parent::InitAuth($request);
+    }
     public function index() {
         $event = new Event;
         $event->setConnection($request->header()['office-name'][0]);
@@ -22,7 +27,7 @@ class EventController extends Controller
     public function store(Request $request) {
         $event = new Event;
         $event->setConnection($request->header()['office-name'][0]);
-        $event['attributes'] = $request->all();
+        $event['attributes'] = $request->except(['remember', 'token']);
         try {
             if($event->save()) {
                 return Response::json(array(
@@ -47,7 +52,7 @@ class EventController extends Controller
         $event->setConnection($request->header()['office-name'][0]);
         $event = $event->find($id);
         if(sizeof($event)) {
-            $event->fill($request->all());
+            $event->fill($request->except(['remember', 'token']));
             try {
                 if($event->save()) {
                       return Response::json(array(
