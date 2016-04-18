@@ -6,3 +6,6 @@ Homestead.yaml
 Homestead.json
 .env
 DEVNOTE.txt
+vendor.zip
+*.php
+bootstrap/app.php
