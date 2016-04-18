@@ -22,7 +22,7 @@ class CoursesController extends Controller
 
   public function store(Request $request) {
     $course = new Course;
-    $course['attributes'] = $request->all();
+    $course['attributes'] = $request->except(['remember', 'token']);
     try {
       if($course->save()) {
         return Response::json(array(
@@ -45,7 +45,7 @@ class CoursesController extends Controller
   public function update(Request $request, $id) {
     $course = Course::find($id);
     if(sizeof($course)) {
-      $course->fill($request->all());
+      $course->fill($request->except(['remember', 'token']));
       try {
         if($course->save()) {
           return Response::json(array(

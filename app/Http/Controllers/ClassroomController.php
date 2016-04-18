@@ -28,7 +28,7 @@ class ClassroomController extends Controller
     public function store(Request $request) {
         $classroom = new Classroom;
         $classroom->setConnection($request->header()['office-name'][0]);
-        $classroom['attributes'] = $request->all();
+        $classroom['attributes'] = $request->except(['remember', 'token']);
         try {
             if($classroom->save()) {
                 return Response::json(array(
@@ -53,7 +53,7 @@ class ClassroomController extends Controller
         $classroom->setConnection($request->header()['office-name'][0]);
         $classroom = $classroom->find($id);
         if(sizeof($classroom)) {
-            $classroom->fill($request->all());
+            $classroom->fill($request->except(['remember', 'token']));
             try {
                 if($classroom->save()) {
                       return Response::json(array(

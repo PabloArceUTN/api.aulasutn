@@ -26,7 +26,7 @@ class ScheduleController extends Controller
   public function store(Request $request) {
     $schedule = new Schedule;
     $schedule->setConnection($request->header()['office-name'][0]);
-    $schedule['attributes'] = $request->all();
+    $schedule['attributes'] = $request->except(['remember', 'token']);
     try {
       if($schedule->save()) {
         return Response::json(array(
@@ -51,7 +51,7 @@ class ScheduleController extends Controller
     $schedule->setConnection($request->header()['office-name'][0]);
     $schedule = $schedule->find($id);
     if(sizeof($schedule)) {
-      $schedule->fill($request->all());
+      $schedule->fill($request->except(['remember', 'token']));
       try {
         if($schedule->save()) {
           return Response::json(array(
