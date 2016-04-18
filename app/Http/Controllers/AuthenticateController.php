@@ -27,7 +27,7 @@ class AuthenticateController extends Controller
       // something went wrong
       return response()->json(['error' => 'could_not_create_token'], 500);
     }
-    $user = Users::where('email', $request->input('email'))
+    $user = Users::where('email', $request->input('email'))->where('active', true)
     ->get()->first();
     // if no errors are encountered we can return a JWT
     // if (!\Hash::check($request->input('password'), $user->password)) {
@@ -45,8 +45,8 @@ class AuthenticateController extends Controller
       $session->save();
       $user->sessions()->attach($session->id);
       Session::put(str_replace('.', '', $session->token), $session->token);
-      return response()->json(['message' => $session->token], 200);
+      return response()->json(['message' => $session->token, 'admin' => $user->admin], 200);
     }
-    return response()->json(compact('token'));
+    return response()->json(['token' => $token,'admin' => $user->admin], 200);
   }
 }
