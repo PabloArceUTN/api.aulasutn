@@ -87,6 +87,10 @@ class CoursesController extends Controller
       ), 404);
     }
   }
+  //Show course
+  public function show($id) {
+    return Course::find($id);
+  }
 
   public function add_career($course_id, $career_id) {
     $course = Course::find($id);
