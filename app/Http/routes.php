@@ -27,13 +27,13 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('/schedules', 'ScheduleController');
     Route::resource('/periods', 'PeriodController');
 
-    Route::get('/careers/courses', 'CareersController@get_courses');
-    Route::get('/careers/users', 'CareersController@get_users');
-    Route::get('/courses/careers', 'CoursesController@get_careers');
-    Route::get('/courses/users', 'CoursesController@get_users');
-    Route::get('/offices/users', 'OfficesController@get_users');
-    Route::get('/precincts/schedules', 'PrecinctController@get_schedules');
-    Route::get('/schedule/precincts', 'CoursesController@get_precincts');
+    Route::get('/careers/{id}/courses', 'CareersController@get_courses');
+    Route::get('/careers/{id}/users', 'CareersController@get_users');
+    Route::get('/courses/{id}/careers', 'CoursesController@get_careers');
+    Route::get('/courses/{id}/users', 'CoursesController@get_users');
+    Route::get('/offices/{id}/users', 'OfficesController@get_users');
+    Route::get('/precincts/{id}/schedules', 'PrecinctController@get_schedules');
+    Route::get('/schedule/{id}/precincts', 'CoursesController@get_precincts');
 
     Route::post('/users/office/{user}/{office}', 'UsersController@add_office');
     Route::post('/users/career/{user}/{career}', 'UsersController@add_career');
